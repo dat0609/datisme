@@ -90,12 +90,16 @@ public class LoginController extends HttpServlet {
                 response.addCookie(uCookie);
                 response.addCookie(pCookie);
             }
-            if(user.getRoleId() == 1) response.sendRedirect("admin");
+            if(user.getRoleId() == 1) {
+                response.sendRedirect("admin");
+                session.setAttribute("user", user);
+            }
             else if(user.getStatus() != 1) response.sendRedirect("active"); //chua active code          
-            else response.sendRedirect("home");
+            else {
+                response.sendRedirect("home");
             
-            session.setAttribute("user", user);
-            System.out.println(user);
+                session.setAttribute("user", user);
+               }
         }else{
             request.setAttribute("err", "Incorrect Id or Password");
             request.getRequestDispatcher("login.jsp").forward(request, response);

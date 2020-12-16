@@ -45,69 +45,31 @@
                             <th>Name of Product</th>
                             <th>Price</th>
                             <th>Quantity</th>
-                            <th>Total Price</th>
+                            <th>Price</th>
                         </tr>
+                        <c:forEach items="${sessionScope.listCart}" var="c" varStatus="counter">
                             <tr>
-                                <td>1</td>
+                                <td>${counter.count}</td>
                                 <td>
-                                    <img src="images/1.jpg" style="width: 100px">
+                                    <img src="images/${c.productImg}" style="width: 100px">
                                 </td>
-                                <td>Product Name</td>
+                                <td>${c.productName}</td>
                                 <td>
-                                    <fmt:formatNumber type="currency" value="50"/>
-                                </td>
-                                <td>
-                                    <input type="number" min="1" max="20" value="1" class="pl-1" style="width: 60px"/>
+                                    <fmt:formatNumber type="number" value="${c.productPrice}"/>
                                 </td>
                                 <td>
-                                    <fmt:formatNumber type="currency" value="100"/>
+                                    ${c.quantity}
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                    <fmt:formatNumber type="number" value="${c.quantity * c.productPrice}"/>
                                 </td>
+                                
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>
-                                    <img src="images/1.jpg" style="width: 100px">
-                                </td>
-                                <td>Product Name</td>
-                                <td>
-                                    <fmt:formatNumber type="currency" value="50"/>
-                                </td>
-                                <td>
-                                    <input type="number" min="1" max="20" value="1" class="pl-1" style="width: 60px"/>
-                                </td>
-                                <td>
-                                    <fmt:formatNumber type="currency" value="100"/>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>
-                                    <img src="images/1.jpg" style="width: 100px">
-                                </td>
-                                <td>Product Name</td>
-                                <td>
-                                    <fmt:formatNumber type="currency" value="50"/>
-                                </td>
-                                <td>
-                                    <input type="number" min="1" max="20" value="1" class="pl-1" style="width: 60px"/>
-                                </td>
-                                <td>
-                                    <fmt:formatNumber type="currency" value="100"/>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                                </td>
-                            </tr>
+                            </c:forEach>
                     </table>
                     <hr/>
                     <div class="text-right">
-                        <h4>Total price:<fmt:formatNumber type="currency" value="100"/></h4>
+                        <h4>Total price:<fmt:formatNumber type="number" value="${totalPrice}"/></h4>
                     </div>
                 </div>
                 <div class="col-md-4 pl-5" style="border: 1px solid #ced4da;border-radius: 5px !important;">
@@ -122,13 +84,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="sdt">Phone number</label>
-                                    <input type="number" name="mobile" class="form-control" placeholder="enter phone number" required>
+                                    <input type="tel" pattern="[0-9]{10}" name="phone" class="form-control" placeholder="enter phone number" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="address">Address</label>
                                     <textarea class="form-control" rows="3" name="address" required></textarea>
                                 </div><div class="form-group">
-                                    <label for="address">Note</label>
+                                    <label for="note">Note</label>
                                     <textarea class="form-control" rows="3" name="note"></textarea>
                                 </div>
 

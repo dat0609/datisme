@@ -118,13 +118,16 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <a class=\"nav-link\" href=\"#\">Contact</a>\n");
       out.write("                </li>\n");
       out.write("                <li class=\"nav-item\">\n");
+      out.write("                    <div class=\"d-flex\">\n");
       out.write("                    <a class=\"nav-link\" href=\"cart\">Cart</a>\n");
+      out.write("                    <span style=\"color: orange\">");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${sessionScope.listCart.size()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("</span>\n");
+      out.write("                    </div>\n");
       out.write("                </li>\n");
       out.write("                ");
       if (_jspx_meth_c_choose_0(_jspx_page_context))
         return;
-      out.write("\n");
-      out.write("\n");
       out.write("\n");
       out.write("            </ul>\n");
       out.write("        </div>\n");
@@ -154,7 +157,6 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <h2>What We Do</h2>\n");
       out.write("                    <hr>\n");
       out.write("                    <p>Come alone, leave with a new lesson!</p>\n");
-      out.write("                    <a class=\"btn btn-primary btn-lg\" href=\"#\">Call to Action &raquo;</a>\n");
       out.write("                </div>\n");
       out.write("                <div class=\"col-md-4 mb-5\">\n");
       out.write("                    ");
@@ -359,7 +361,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_forEach_0 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _jspx_tagPool_c_forEach_var_items.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
     _jspx_th_c_forEach_0.setPageContext(_jspx_page_context);
     _jspx_th_c_forEach_0.setParent(null);
-    _jspx_th_c_forEach_0.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${listProduct}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    _jspx_th_c_forEach_0.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${sessionScope.listProduct}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
     _jspx_th_c_forEach_0.setVar("p");
     int[] _jspx_push_body_count_c_forEach_0 = new int[] { 0 };
     try {
@@ -371,7 +373,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
           out.write("                        <div class=\"card h-100\">\n");
           out.write("                            <img class=\"card-img-top\" src=\"images/");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${p.image}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-          out.write("\" width=\"20   0\" height=\"300\" alt=\"\">\n");
+          out.write("\" width=\"200\" height=\"300\" alt=\"\">\n");
           out.write("                            <div class=\"card-body\">\n");
           out.write("                                <h4 class=\"card-title\">");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${p.product_name}", java.lang.String.class, (PageContext)_jspx_page_context, null));

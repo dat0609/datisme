@@ -39,6 +39,7 @@ public class DeleteCartController extends HttpServlet {
             for (int i = listCart.size() - 1; i >= 0; i--) {
                 if(listCart.get(i).getProductId() == productId) listCart.remove(i);   
             }
+            if(listCart.size() == 0) request.getSession().removeAttribute("listCart");
             response.sendRedirect("cart");
         }
     }

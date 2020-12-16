@@ -196,4 +196,22 @@ public class UserDAO {
         }
         return 0;
     }
+    
+    public int getNumUser() {
+        try {
+            String query = "select count(UserId) from Users";
+
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            int count = 0;
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+            return count;
+        } catch (Exception e) {
+
+        }
+        return 0;
+    }
 }

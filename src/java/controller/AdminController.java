@@ -5,8 +5,14 @@
  */
 package controller;
 
+import dao.OrderDAO;
+import dao.ProductDAO;
+import dao.UserDAO;
+import dao.ViewDAO;
+import dto.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,16 +37,29 @@ public class AdminController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AdminController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AdminController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            int pageIndex = 1;
+            final int PAGE_SIZE = 4;
+
+            String raw_page = request.getParameter("pageIndex");
+            if (raw_page != null) {
+                pageIndex = Integer.parseInt(raw_page);
+            }
+            ProductDAO dao = new ProductDAO();
+            List<Product> listProduct = dao.getAllPaggingAdmin(pageIndex, PAGE_SIZE);
+            int totalPage = dao.countPage(PAGE_SIZE);        
+            int count = new ViewDAO().getView();
+            int count1 = new UserDAO().getNumUser();
+            double count2 = new OrderDAO().getTotalMoney();
+            int count3 = dao.countProduct();
+            
+            request.setAttribute("totalProduct", count3);
+            request.setAttribute("totalMoney", count2);
+            request.setAttribute("totalUser", count1);
+            request.setAttribute("viewCount", count);
+            request.setAttribute("listProduct", listProduct);
+            request.setAttribute("totalPage", totalPage);
+            request.setAttribute("PageIndex", pageIndex);
+            request.getRequestDispatcher("admin.jsp").forward(request, response);
         }
     }
 
@@ -56,7 +75,7 @@ public class AdminController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("admin.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**

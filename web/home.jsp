@@ -44,7 +44,6 @@
                     <h2>What We Do</h2>
                     <hr>
                     <p>Come alone, leave with a new lesson!</p>
-                    <a class="btn btn-primary btn-lg" href="#">Call to Action &raquo;</a>
                 </div>
                 <div class="col-md-4 mb-5">
                     <c:if test="${sessionScope.user != null}">
@@ -63,10 +62,10 @@
             <!-- /.row -->
 
             <div class="row">
-                <c:forEach items="${listProduct}" var="p">
+                <c:forEach items="${sessionScope.listProduct}" var="p">
                     <div class="col-md-4 mb-5">
                         <div class="card h-100">
-                            <img class="card-img-top" src="images/${p.image}" width="20   0" height="300" alt="">
+                            <img class="card-img-top" src="images/${p.image}" width="200" height="300" alt="">
                             <div class="card-body">
                                 <h4 class="card-title">${p.product_name}</h4>
                                 <h5>${p.price} VND</h5>

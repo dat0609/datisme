@@ -45,10 +45,12 @@ public class HomeController extends HttpServlet {
             ProductDAO dao = new ProductDAO();
             List<Product> listProduct = dao.getAllPagging(pageIndex, PAGE_SIZE);
             int totalPage = dao.countPage(PAGE_SIZE);
-            request.setAttribute("listProduct", listProduct);
+            request.getSession().setAttribute("listProduct", listProduct);
+            
             request.setAttribute("totalPage", totalPage);
             request.setAttribute("PageIndex", pageIndex);
             request.getRequestDispatcher("home.jsp").forward(request, response);
+            //request.getRequestDispatcher("admin.jsp").forward(request, response);
         }
         
     }

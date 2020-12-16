@@ -22,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class RegisterController extends HttpServlet {
 
-    String user = "datisme731@gmail.com";
-    String pass = "Lequocdat10";
+    String user_email = "datisme731@gmail.com";
+    String pass_email = "Lequocdat10";
     String SUB = "Here is your active code";
 
     /**
@@ -83,13 +83,13 @@ public class RegisterController extends HttpServlet {
         String email = request.getParameter("email");
         String fullname = request.getParameter("fullname");
         String phone = request.getParameter("phone");
-
-        User u = new User();
-        u.setUserId(userId);
-        u.setPassword(password);
-        u.setEmail(email);
-        u.setName(fullname);
-        u.setPhone(phone);
+        User user = new User();
+        User u = new UserDAO().getUserByEmail(email);
+        user.setUserId(userId);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setName(fullname);
+        user.setPhone(phone);
 
         Random rd = new Random();
         String root = "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM";
@@ -98,18 +98,19 @@ public class RegisterController extends HttpServlet {
             int index = rd.nextInt(root.length() - 1);
             capcha = capcha + root.charAt(index);
         }
-        u.setActive_code(capcha);
+        user.setActive_code(capcha);
+        //System.out.println(user);
         int count = 0;
-        if (!u.getEmail().equals(email)) {
-            count = new UserDAO().create(u);
-            System.out.println(u);
+        if (u == null) {
+            count = new UserDAO().create(user);
+
             if (count > 0) {
-                System.out.println(u);
-                SendMail.send(u.getEmail(), SUB, u.getActive_code(), user, pass);
-                request.getSession().setAttribute("user", u);
+
+                SendMail.send(user.getEmail(), SUB, user.getActive_code(), user_email, pass_email);
+                request.getSession().setAttribute("user", user);
                 request.getRequestDispatcher("activeCode.jsp").forward(request, response);
             }
-            if (u.getUserId().equals(userId)) {
+            if (user.getUserId().equals(userId)) {
                 request.setAttribute("err", "Id already exist");
                 request.getRequestDispatcher("register.jsp").forward(request, response);
             }
@@ -119,7 +120,7 @@ public class RegisterController extends HttpServlet {
 
         }
 
-        //  new UserDAO().create(u);
+        //  new UserDAO().create(user);
         
     }
 

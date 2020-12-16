@@ -21,7 +21,10 @@
                     <a class="nav-link" href="#">Contact</a>
                 </li>
                 <li class="nav-item">
+                    <div class="d-flex">
                     <a class="nav-link" href="cart">Cart</a>
+                    <span style="color: orange">${sessionScope.listCart.size()}</span>
+                    </div>
                 </li>
                 <c:choose>
                     <c:when test="${sessionScope.user != null}">
@@ -40,8 +43,6 @@
                         </li>
                     </c:otherwise>
                 </c:choose>
-
-
             </ul>
         </div>
     </div>

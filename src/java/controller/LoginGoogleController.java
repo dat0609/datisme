@@ -5,6 +5,9 @@
  */
 package controller;
 
+import dao.GoogleUtils;
+import dto.GooglePojo;
+import dto.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -35,7 +38,7 @@ public class LoginGoogleController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginGoogleController</title>");            
+            out.println("<title>Servlet LoginGoogleController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet LoginGoogleController at " + request.getContextPath() + "</h1>");
@@ -56,7 +59,20 @@ public class LoginGoogleController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String code = request.getParameter("code");
+        if (code == null || code.isEmpty()) {
+            request.getRequestDispatcher("newjsp.jsp").forward(request, response);
+        } else {
+            String accessToken = GoogleUtils.getToken(code);
+            GooglePojo googlePojo = GoogleUtils.getUserInfo(accessToken);
+            User user = new User();
+            
+            request.setAttribute("id", googlePojo.getId());
+            request.setAttribute("name", googlePojo.getName());
+            request.setAttribute("email", googlePojo.getEmail());
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        }
+
     }
 
     /**

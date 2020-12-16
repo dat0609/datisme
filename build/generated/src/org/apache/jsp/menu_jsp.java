@@ -62,7 +62,7 @@ public final class menu_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<!-- Navigation -->\n");
       out.write("<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark fixed-top\">\n");
       out.write("    <div class=\"container\">\n");
-      out.write("        <a class=\"navbar-brand\" href=\"#\">The Collector</a>\n");
+      out.write("        <a class=\"navbar-brand\" href=\"home\">The Collector</a>\n");
       out.write("        <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarResponsive\" aria-controls=\"navbarResponsive\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n");
       out.write("            <span class=\"navbar-toggler-icon\"></span>\n");
       out.write("        </button>\n");
@@ -80,13 +80,16 @@ public final class menu_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <a class=\"nav-link\" href=\"#\">Contact</a>\n");
       out.write("                </li>\n");
       out.write("                <li class=\"nav-item\">\n");
-      out.write("                    <a class=\"nav-link\" href=\"#\">Cart</a>\n");
+      out.write("                    <div class=\"d-flex\">\n");
+      out.write("                    <a class=\"nav-link\" href=\"cart\">Cart</a>\n");
+      out.write("                    <span style=\"color: orange\">");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${sessionScope.listCart.size()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("</span>\n");
+      out.write("                    </div>\n");
       out.write("                </li>\n");
       out.write("                ");
       if (_jspx_meth_c_choose_0(_jspx_page_context))
         return;
-      out.write("\n");
-      out.write("\n");
       out.write("\n");
       out.write("            </ul>\n");
       out.write("        </div>\n");

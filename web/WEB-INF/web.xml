@@ -4,6 +4,14 @@
         <filter-name>FillterAdmin</filter-name>
         <filter-class>controller.FillterAdmin</filter-class>
     </filter>
+    <filter>
+        <filter-name>FillterView</filter-name>
+        <filter-class>controller.FillterView</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>FillterView</filter-name>
+        <url-pattern>/home</url-pattern>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>FillterAdmin</filter-name>
         <url-pattern>/admin</url-pattern>
@@ -60,6 +68,18 @@
         <servlet-name>UpdateCartController</servlet-name>
         <servlet-class>controller.UpdateCartController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateProductController</servlet-name>
+        <servlet-class>controller.UpdateProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckOutController</servlet-name>
+        <servlet-class>controller.CheckOutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddProductController</servlet-name>
+        <servlet-class>controller.AddProductController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -111,6 +131,18 @@
     <servlet-mapping>
         <servlet-name>UpdateCartController</servlet-name>
         <url-pattern>/sync-cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProductController</servlet-name>
+        <url-pattern>/update-product</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckOutController</servlet-name>
+        <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddProductController</servlet-name>
+        <url-pattern>/add-product</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
