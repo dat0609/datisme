@@ -73,11 +73,11 @@ public class ActiveCodeController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String code = request.getParameter("code");
-        String userId = request.getParameter("userId");
+        String userId = request.getParameter("userID");
         
         User user = new UserDAO().getUserById(userId);
      
-        if(user.getActive_code().equals(code)){
+            if(user.getActive_code().equals(code)){
             new UserDAO().updateStatus(userId, 1);
             response.sendRedirect("home");
             request.getSession().setAttribute("user", user);

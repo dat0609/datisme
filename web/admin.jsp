@@ -32,7 +32,7 @@
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin">
                     <div class="sidebar-brand-icon rotate-n-15">
                         <i class="fas fa-laugh-wink"></i>
                     </div>
@@ -44,7 +44,7 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="admin">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -71,7 +71,7 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Custom Utilities:</h6>
                             <a class="collapse-item" href="add-product">Add Product</a>
-                            <a class="collapse-item" href="update-product">Update Product</a>
+                            
                         </div>
                     </div>
                 </li>
@@ -153,7 +153,7 @@
                                     </div>
                                 </div>
                             </div>
-                                            
+
                             <div class="col-xl-3 col-md-6 mb-4">
                                 <div class="card border-left-primary shadow h-100 py-2">
                                     <div class="card-body">
@@ -218,7 +218,7 @@
                                         <h6 class="m-0 font-weight-bold text-primary">Product Overview</h6>
 
                                     </div>
-                                    
+
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
@@ -234,23 +234,26 @@
                                         </thead>
                                         <tbody>
                                             <c:forEach items="${requestScope.listProduct}" var="p" varStatus="counter">
-                                                <form action="update-product">
+                                            <form action="update-product">
                                                 <tr>
-                                                    <input type="hidden" name="productId" value="${p.product_id}" />
-                                                    <td>${counter.count}</td>
-                                                    <td><input type="text" size="10" name="name" value="${p.product_name}" /></td>
-                                                    <td><input type="text" size="8" name="price" value="${p.price}" /></td>
-                                                    <td><input type="text" size="2" name="quantity" value="${p.quantity}" /></td>
-                                                    <td style="size: 5px">${p.description}</td>
-                                                    <td><input type="text" size="1" name="status" value="${p.status}" /></td>
-                                                    <td><img class="card-img-top" src="images/${p.image}" width="5" height="100" alt=""></td>
-                                                    <td><a href="update-product?productId=${p.product_id}">Update</a></td>
+                                                <input type="hidden" name="productId" value="${p.product_id}" />
+                                                <td>${counter.count}</td>
+                                                <td>${p.product_name}</td>
+                                                <td>${p.price}</td>
+                                                <td>${p.quantity}</td>
+                                                <td style="size: 5px">${p.description}</td>
+                                                <td>${p.status}</td>
+                                                <td><img class="card-img-top" src="images/${p.image}" width="5" height="100" alt=""></td>
+                                                <td><a href="update-product?productId=${p.product_id}">Update</a></td>
+                                                <td><a  href="delete-product?productId=${p.product_id}" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a></td>   
+                                                
+                                                
                                                 </tr>
-                                                </form>
-                                            </c:forEach>
+                                            </form>
+                                        </c:forEach>
                                         </tbody>
                                     </table>
-                                        
+
                                     <nav aria-label="..." class="d-flex justify-content-center">
                                         <ul class="pagination pagination-lg">
                                             <c:forEach begin="1" end="${totalPage}" var="i"> 

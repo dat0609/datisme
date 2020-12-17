@@ -86,11 +86,19 @@ public class ProfileController extends HttpServlet {
         user.setAddress(address);
         user.setPhone(phone);
         user.setPassword(pass);
-        user.setUserId(u.getUserId());
+        //user.setUserId(u.getUserId());
         
        int count = dao.updateUser(user);
-        response.sendRedirect("profile");
-        System.out.println(count);
+       if(count > 0){
+           System.out.println(count);
+           response.sendRedirect("profile");
+       }else{
+           
+       }
+//       System.out.println(count);
+//        System.out.println("user 2:"+user);
+//        response.sendRedirect("profile");
+        
     }
 
     /**

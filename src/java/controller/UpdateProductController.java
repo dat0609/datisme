@@ -33,30 +33,27 @@ public class UpdateProductController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            int productId = Integer.parseInt(request.getParameter("productId"));
-            Product product = new ProductDAO().getProductById(productId);
-            
-            
-            request.setAttribute("product", product);
-            
-            String name = request.getParameter("name");
-            double price = Double.parseDouble(request.getParameter("price"));
-            String description = request.getParameter("description");
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
-            int status = Integer.parseInt(request.getParameter("status"));
-            
-            product.setProduct_name(name);
-            product.setPrice(price);
-            product.setDescription(description);
-            product.setQuantity(quantity);
-            product.setStatus(status);
-            
-            
-            boolean check = new ProductDAO().UpdateProduct(product);
-            if (check == true) {
-                response.sendRedirect("admin");
-            }
-            
+
+//            String name = request.getParameter("name");
+//            double price = Double.parseDouble(request.getParameter("price"));
+//            String description = request.getParameter("description");
+//            int quantity = Integer.parseInt(request.getParameter("quantity"));
+//            int status = Integer.parseInt(request.getParameter("status"));
+//            
+//            
+//            product.setProduct_name(name);
+//            product.setPrice(price);
+//            product.setDescription(description);
+//            product.setQuantity(quantity);
+//            product.setStatus(status);
+//            
+//            
+//            boolean check = new ProductDAO().UpdateProduct(product);
+//            System.out.println(check);
+//            if (check == true) {
+//                request.setAttribute("product", product);
+//                response.sendRedirect("admin");
+//            }
         }
     }
 
@@ -72,6 +69,7 @@ public class UpdateProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         request.getRequestDispatcher("updateProduct.jsp").forward(request, response);
     }
 
@@ -86,7 +84,39 @@ public class UpdateProductController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        int productId = Integer.parseInt(request.getParameter("productId"));
+//            Product product = new ProductDAO().getProductById(productId);
+//
+//            request.setAttribute("product", product);
+        int productId = Integer.parseInt(request.getParameter("productId"));
+        Product product = new ProductDAO().getProductById(productId);
+        
+        System.out.println(product);
+        request.getSession().setAttribute("product", product);
+
+        String name = request.getParameter("name");
+        double price = Double.parseDouble(request.getParameter("price"));
+        String description = request.getParameter("description");
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        int status = Integer.parseInt(request.getParameter("status"));
+//
+        ProductDAO dao = new ProductDAO();
+        
+
+        System.out.println(product);
+        product.setProduct_name(name);
+        product.setPrice(price);
+        product.setDescription(description);
+        product.setQuantity(quantity);
+        product.setStatus(status);
+        System.out.println(product);
+        boolean check = dao.UpdateProduct(product);
+        if (check) {
+            response.sendRedirect("admin");
+        } else {
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+        }
+
     }
 
     /**

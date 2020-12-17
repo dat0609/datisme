@@ -115,7 +115,7 @@ public class AddProductController extends HttpServlet {
         product.setDescription(description);
         product.setQuantity(quantity);
         product.setStatus(status);
-        product.setImage("D:\\JavaWeb\\BookStore\\web\\images\\"+file);
+        product.setImage(file);
         int count = new ProductDAO().addProduct(product);
         if (count > 0) {
             response.sendRedirect("admin");

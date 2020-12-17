@@ -42,7 +42,7 @@
                 <div class="col-md-12 mt-5">
                     <div class="alert alert-success text-center" role="alert">
                         <h5>Your order has been received, thank you for your purchase</h5>
-                        <a href="#" class="btn btn-success mt-2">continue shopping</a>
+                        <a href="home" class="btn btn-success mt-2">continue shopping</a>
                     </div>
                 </div>
             </div>

@@ -177,7 +177,7 @@ public class UserDAO {
         try {
             String query = "UPDATE [dbo].[Users]\n"
                     + "   SET\n"
-                    + "      ,[address] = ?\n"
+                    + "      [address] = ?\n"
                     + "      ,[email] = ?\n"
                     + "      ,[phone] = ?\n"
                     + "      ,[password] = ?\n"

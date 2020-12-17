@@ -10,6 +10,7 @@ import dao.UserDAO;
 import dto.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.Random;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -83,6 +84,7 @@ public class RegisterController extends HttpServlet {
         String email = request.getParameter("email");
         String fullname = request.getParameter("fullname");
         String phone = request.getParameter("phone");
+
         User user = new User();
         User u = new UserDAO().getUserByEmail(email);
         user.setUserId(userId);
@@ -103,14 +105,15 @@ public class RegisterController extends HttpServlet {
         int count = 0;
         if (u == null) {
             count = new UserDAO().create(user);
-
+            //request.setAttribute("user", u);
             if (count > 0) {
-
-                SendMail.send(user.getEmail(), SUB, user.getActive_code(), user_email, pass_email);
                 request.getSession().setAttribute("user", user);
                 request.getRequestDispatcher("activeCode.jsp").forward(request, response);
+                SendMail.send(user.getEmail(), SUB, user.getActive_code(), user_email, pass_email);
+
             }
             if (user.getUserId().equals(userId)) {
+
                 request.setAttribute("err", "Id already exist");
                 request.getRequestDispatcher("register.jsp").forward(request, response);
             }
@@ -121,7 +124,6 @@ public class RegisterController extends HttpServlet {
         }
 
         //  new UserDAO().create(user);
-        
     }
 
     /**

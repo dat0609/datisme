@@ -40,8 +40,8 @@
                         <span class="login100-form-title p-b-34 p-t-27">
                             Please Check Your Email
                         </span>
-                        <h4>Welcome </h4>
-                        <input type="hidden" name="userId" value="${sessionScope.user.userId}">
+                        <h4>Welcome ${user.name}</h4>
+                        <input type="hidden" name="userID" value="${user.userId}">
                         <div class="wrap-input100 validate-input" data-validate = "Enter active code">
                             <input class="input100" type="text" name="code" placeholder="Active-code">
                             <span class="focus-input100" data-placeholder="&#xf207;"></span>

@@ -209,10 +209,23 @@ public class ProductDAO {
             ps.setInt(5, p.getStatus());
             ps.setString(6, p.getImage());
 
-
             return ps.executeUpdate();
         } catch (Exception e) {
         }
         return 0;
+    }
+
+    public void DeleteProduct(String productId) {
+
+        try {
+            String query = "DELETE FROM [dbo].[product]\n"
+                    + "      WHERE product_id = ?";
+
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, productId);
+            rs = ps.executeQuery();
+        } catch (Exception e) {
+        }
     }
 }

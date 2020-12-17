@@ -46,6 +46,7 @@ public class AdminController extends HttpServlet {
             }
             ProductDAO dao = new ProductDAO();
             List<Product> listProduct = dao.getAllPaggingAdmin(pageIndex, PAGE_SIZE);
+            
             int totalPage = dao.countPage(PAGE_SIZE);        
             int count = new ViewDAO().getView();
             int count1 = new UserDAO().getNumUser();
