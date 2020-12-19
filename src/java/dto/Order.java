@@ -10,6 +10,7 @@ package dto;
  * @author liemn
  */
 public class Order {
+
     private int id;
     private String Customer;
     private int shippingId;
@@ -19,6 +20,12 @@ public class Order {
     private int status;
 
     public Order() {
+    }
+
+    public Order(String Customer, double totalPrice, String createDate) {
+        this.Customer = Customer;
+        this.totalPrice = totalPrice;
+        this.createDate = createDate;
     }
 
     public Order(int id, String Customer, int shippingId, String createDate, double totalPrice, String note, int status) {
@@ -86,5 +93,5 @@ public class Order {
     public void setStatus(int status) {
         this.status = status;
     }
-    
+
 }

@@ -5,11 +5,7 @@
  */
 package controller;
 
-import dao.OrderDAO;
 import dao.ProductDAO;
-import dao.UserDAO;
-import dao.ViewDAO;
-import dto.Order;
 import dto.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author liemn
  */
-public class AdminController extends HttpServlet {
+public class SearchController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,33 +34,12 @@ public class AdminController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            int pageIndex = 1;
-            final int PAGE_SIZE = 4;
-
-            String raw_page = request.getParameter("pageIndex");
-            if (raw_page != null) {
-                pageIndex = Integer.parseInt(raw_page);
-            }
-            ProductDAO dao = new ProductDAO();
-            OrderDAO orderDAO = new OrderDAO();
-            List<Product> listProduct = dao.getAllPaggingAdmin(pageIndex, PAGE_SIZE);
-            List<Order> listTop = orderDAO.getTopUser();
             
-            int totalPage = dao.countPage(PAGE_SIZE);        
-            int count = new ViewDAO().getView();
-            int count1 = new UserDAO().getNumUser();
-            double count2 = orderDAO.getTotalMoney();
-            int count3 = dao.countProduct();
             
-            request.setAttribute("listTop", listTop);
-            request.setAttribute("totalProduct", count3);
-            request.setAttribute("totalMoney", count2);
-            request.setAttribute("totalUser", count1);
-            request.setAttribute("viewCount", count);
-            request.setAttribute("listProduct", listProduct);
-            request.setAttribute("totalPage", totalPage);
-            request.setAttribute("PageIndex", pageIndex);
-            request.getRequestDispatcher("admin.jsp").forward(request, response);
+            String keyword = request.getParameter("keyword");
+            List<Product> listSearchProduct = new ProductDAO().searchProducts(keyword);
+            request.setAttribute("listSearchProduct", listSearchProduct);
+            request.getRequestDispatcher("search.jsp").forward(request, response);
         }
     }
 

@@ -8,10 +8,13 @@ package dao;
 import context.DBContext;
 import dto.Order;
 import dto.Shipping;
+import dto.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -67,5 +70,19 @@ public class OrderDAO {
 
         }
         return 0;
+    }
+    public List<Order> getTopUser(){
+        String query = " select userId,totalPrice,date from Orders order by totalPrice ";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            List<Order> list = new ArrayList<>();
+            while(rs.next()){
+                list.add(new Order(rs.getString(1), rs.getDouble(2), rs.getString(3)));
+            }
+            return list;
+        } catch (Exception e) {
+        }return null;
     }
 }

@@ -16,6 +16,14 @@
         <filter-name>FillterAdmin</filter-name>
         <url-pattern>/admin</url-pattern>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>FillterAdmin</filter-name>
+        <url-pattern>/add-product</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>FillterAdmin</filter-name>
+        <url-pattern>/delete-product</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>LoginController</servlet-name>
         <servlet-class>controller.LoginController</servlet-class>
@@ -69,10 +77,6 @@
         <servlet-class>controller.UpdateCartController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>UpdateProductController</servlet-name>
-        <servlet-class>controller.UpdateProductController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>CheckOutController</servlet-name>
         <servlet-class>controller.CheckOutController</servlet-class>
     </servlet>
@@ -87,6 +91,14 @@
     <servlet>
         <servlet-name>Thank</servlet-name>
         <servlet-class>controller.Thank</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateProductController</servlet-name>
+        <servlet-class>controller.UpdateProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchController</servlet-name>
+        <servlet-class>controller.SearchController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -141,10 +153,6 @@
         <url-pattern>/sync-cart</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>UpdateProductController</servlet-name>
-        <url-pattern>/update-product</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>CheckOutController</servlet-name>
         <url-pattern>/checkout</url-pattern>
     </servlet-mapping>
@@ -159,6 +167,14 @@
     <servlet-mapping>
         <servlet-name>Thank</servlet-name>
         <url-pattern>/thank</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProductController</servlet-name>
+        <url-pattern>/update-product</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchController</servlet-name>
+        <url-pattern>/search</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

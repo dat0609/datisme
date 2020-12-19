@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -41,6 +42,7 @@
             <div class="row tm-edit-product-row">
               <div class="col-xl-6 col-lg-6 col-md-12">
                   <form action="update-product" class="tm-edit-product-form" method="post">
+                      
                   <div class="form-group mb-3">
                     <label
                       for="name"

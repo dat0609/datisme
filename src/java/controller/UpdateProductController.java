@@ -5,8 +5,6 @@
  */
 package controller;
 
-import dao.ProductDAO;
-import dto.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -33,27 +31,16 @@ public class UpdateProductController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-
-//            String name = request.getParameter("name");
-//            double price = Double.parseDouble(request.getParameter("price"));
-//            String description = request.getParameter("description");
-//            int quantity = Integer.parseInt(request.getParameter("quantity"));
-//            int status = Integer.parseInt(request.getParameter("status"));
-//            
-//            
-//            product.setProduct_name(name);
-//            product.setPrice(price);
-//            product.setDescription(description);
-//            product.setQuantity(quantity);
-//            product.setStatus(status);
-//            
-//            
-//            boolean check = new ProductDAO().UpdateProduct(product);
-//            System.out.println(check);
-//            if (check == true) {
-//                request.setAttribute("product", product);
-//                response.sendRedirect("admin");
-//            }
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet UpdateProductController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet UpdateProductController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -69,7 +56,6 @@ public class UpdateProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         request.getRequestDispatcher("updateProduct.jsp").forward(request, response);
     }
 
@@ -84,39 +70,8 @@ public class UpdateProductController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        int productId = Integer.parseInt(request.getParameter("productId"));
-//            Product product = new ProductDAO().getProductById(productId);
-//
-//            request.setAttribute("product", product);
-        int productId = Integer.parseInt(request.getParameter("productId"));
-        Product product = new ProductDAO().getProductById(productId);
-        
-        System.out.println(product);
-        request.getSession().setAttribute("product", product);
-
-        String name = request.getParameter("name");
-        double price = Double.parseDouble(request.getParameter("price"));
-        String description = request.getParameter("description");
-        int quantity = Integer.parseInt(request.getParameter("quantity"));
-        int status = Integer.parseInt(request.getParameter("status"));
-//
-        ProductDAO dao = new ProductDAO();
-        
-
-        System.out.println(product);
-        product.setProduct_name(name);
-        product.setPrice(price);
-        product.setDescription(description);
-        product.setQuantity(quantity);
-        product.setStatus(status);
-        System.out.println(product);
-        boolean check = dao.UpdateProduct(product);
-        if (check) {
-            response.sendRedirect("admin");
-        } else {
-            request.getRequestDispatcher("error.jsp").forward(request, response);
-        }
-
+        String id = request.getParameter("productId");
+        System.out.println("ID:" +id);
     }
 
     /**

@@ -228,4 +228,30 @@ public class ProductDAO {
         } catch (Exception e) {
         }
     }
+
+    public List<Product> searchProducts(String keyword) {
+        String query = "SELECT product_id,product_name,price,description,image FROM product"
+                + " where status =1 and product_name like ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1,"%" + keyword + "%");
+            
+            rs = ps.executeQuery();
+            List<Product> list = new ArrayList<>();
+            while (rs.next()) {
+                //Food f = new Food(rs.getString(1), rs.getDouble(2), rs.getInt(3), rs.getString(4), rs.getDate(5));
+                list.add(new Product(rs.getString(1),
+                        rs.getString(2),
+                        rs.getDouble(3),
+                        rs.getString(4),
+                        rs.getString(5)));
+
+            }
+            return list;
+        } catch (Exception e) {
+        }
+        return null;
+
+    }
 }

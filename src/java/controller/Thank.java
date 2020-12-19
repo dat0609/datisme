@@ -32,7 +32,7 @@ public class Thank extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             request.getSession().removeAttribute("listCart");
-            request.getRequestDispatcher("thank.jsp").forward(request, response);
+            
     }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -47,7 +47,7 @@ public class Thank extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("thank.jsp").forward(request, response);
     }
 
     /**

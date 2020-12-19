@@ -71,7 +71,7 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Custom Utilities:</h6>
                             <a class="collapse-item" href="add-product">Add Product</a>
-                            
+
                         </div>
                     </div>
                 </li>
@@ -126,8 +126,7 @@
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                    class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+
                         </div>
 
                         <!-- Content Row -->
@@ -246,8 +245,8 @@
                                                 <td><img class="card-img-top" src="images/${p.image}" width="5" height="100" alt=""></td>
                                                 <td><a href="update-product?productId=${p.product_id}">Update</a></td>
                                                 <td><a  href="delete-product?productId=${p.product_id}" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a></td>   
-                                                
-                                                
+
+
                                                 </tr>
                                             </form>
                                         </c:forEach>
@@ -282,14 +281,27 @@
                                     <!-- Card Header - Dropdown -->
                                     <div
                                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold text-primary">Best Seller</h6>
-                                        <div class="dropdown no-arrow">
-                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <h6 class="m-0 font-weight-bold text-primary">Top User Buying</h6>
 
-                                            </a>
-                                        </div>
                                     </div>
+                                    <table class="table table-bordered">
+                                        <thead >
+                                            <tr>
+                                                <th>User Name:</th>
+                                                <th>Total Price:</th>
+                                                <th>Date:</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach items="${listTop}" var="l">
+                                            <tr>
+                                                <td>${l.getCustomer()}</td>
+                                                <td>${l.totalPrice}</td>
+                                                <td>${l.createDate}</td>
+                                            </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
                                     <!-- Card Body -->
                                     <div class="card-body">
                                         <div class="chart-pie pt-4 pb-2">
