@@ -3,14 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/JavaWeb/BookStore/src/java/dao/OrderDAO.java</file>
             <file>file:/D:/JavaWeb/BookStore/web/navbar.jsp</file>
-            <file>file:/D:/JavaWeb/BookStore/web/search.jsp</file>
-            <file>file:/D:/JavaWeb/BookStore/src/java/dto/Order.java</file>
-            <file>file:/D:/JavaWeb/BookStore/src/java/dao/ProductDAO.java</file>
-            <file>file:/D:/JavaWeb/BookStore/src/java/controller/SearchController.java</file>
+            <file>file:/D:/JavaWeb/BookStore/web/WEB-INF/web.xml</file>
             <file>file:/D:/JavaWeb/BookStore/web/admin.jsp</file>
-            <file>file:/D:/JavaWeb/BookStore/src/java/controller/AdminController.java</file>
+            <file>file:/D:/JavaWeb/BookStore/src/java/controller/LoginController.java</file>
         </group>
     </open-files>
 </project-private>

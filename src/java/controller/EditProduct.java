@@ -5,9 +5,8 @@
  */
 package controller;
 
-import dao.GoogleUtils;
-import dto.GooglePojo;
-import dto.User;
+import dao.ProductDAO;
+import dto.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -19,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author liemn
  */
-public class LoginGoogleController extends HttpServlet {
+public class EditProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,16 +33,8 @@ public class LoginGoogleController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LoginGoogleController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LoginGoogleController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            
+            
         }
     }
 
@@ -59,20 +50,7 @@ public class LoginGoogleController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String code = request.getParameter("code");
-        if (code == null || code.isEmpty()) {
-            request.getRequestDispatcher("newjsp.jsp").forward(request, response);
-        } else {
-            String accessToken = GoogleUtils.getToken(code);
-            GooglePojo googlePojo = GoogleUtils.getUserInfo(accessToken);
-            User user = new User();
-            
-            request.setAttribute("id", googlePojo.getId());
-            request.setAttribute("name", googlePojo.getName());
-            request.setAttribute("email", googlePojo.getEmail());
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        }
-
+        request.getRequestDispatcher("updateProduct.jsp").forward(request, response);
     }
 
     /**
@@ -86,7 +64,25 @@ public class LoginGoogleController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String name = request.getParameter("name");
+            double price = Double.parseDouble(request.getParameter("price"));
+            String description = request.getParameter("description");
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
+            int status = Integer.parseInt(request.getParameter("price"));
+            
+            Product product = (Product) request.getSession().getAttribute("product");
+            System.out.println(product);
+            product.setProduct_name(name);
+            product.setPrice(price);
+            product.setDescription(description);
+            product.setQuantity(quantity);
+            product.setStatus(status);
+            
+            int count = new ProductDAO().UpdateProduct(product);
+            
+            if (count > 0) {
+                response.sendRedirect("admin");
+            }
     }
 
     /**

@@ -7,10 +7,13 @@ package controller;
 
 import dao.OrderDAO;
 import dao.OrderDetailDAO;
+import dao.ProductDAO;
 import dao.SendMail;
 import dao.ShippingDAO;
 import dto.Cart;
 import dto.Order;
+import dto.OrderDetail;
+import dto.Product;
 import dto.Shipping;
 import dto.User;
 import java.io.IOException;
@@ -29,7 +32,7 @@ public class CheckOutController extends HttpServlet {
 
     String user = "datisme731@gmail.com";
     String pass = "Lequocdat10";
-    String SUB = "Here is your active code";
+    String SUB = "Thank for choosing The Collector ";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -88,7 +91,7 @@ public class CheckOutController extends HttpServlet {
 
         User user = (User) request.getSession().getAttribute("user");
         String username = user.getUserId();
-
+        
         Shipping shipping = new Shipping();
         shipping.setName(name);
         shipping.setPhone(phone);
@@ -97,13 +100,14 @@ public class CheckOutController extends HttpServlet {
         int shippingId = new ShippingDAO().addShipping(shipping);
         if (shippingId > 0) {//luu thanh cong
             List<Cart> listCart = (List<Cart>) request.getSession().getAttribute("listCart");
-
+            
             double totalPrice = 0;
-            for (Cart c : listCart) {
+            for (Cart c : listCart) {                
                 totalPrice += c.getProductPrice() * c.getQuantity();
             }
-            System.out.println(username);
+            
             Order order = new Order();
+            
             order.setCustomer(username);
             order.setShippingId(shippingId);
             order.setTotalPrice(totalPrice);
@@ -113,12 +117,30 @@ public class CheckOutController extends HttpServlet {
 
             if (orderId > 0) {//luu thanh cong
                 //them listCart vao order_detail
-                int count = new OrderDetailDAO().add(listCart, orderId);
+                OrderDetailDAO detailDAO = new OrderDetailDAO();
+                int count = detailDAO.add(listCart, orderId);
 
                 if (count > 0) {//luu list cart thanh cong
-                    
-                    SendMail.send(user.getEmail(), SUB, "Thank", this.user, pass);
-                    response.sendRedirect("thank.jsp");
+                    String msg = "<!DOCTYPE html>\n"
+                                + "<html lang=\"en\">\n"
+                                + "\n"
+                                + "<head>\n"
+                                + "</head>\n"
+                                + "\n"
+                                + "<body>\n"
+                                + "    <h3 style=\"color: blue;\">Your order has been processing.</h3>\n"
+                                + "    <div>Full Name : "+name+"</div>\n"
+                                + "    <div>Phone : "+phone+"</div>\n"
+                                + "    <div>Address : "+address+"</div>\n"                              
+                                + "    <h3 style=\"color: blue;\">Thank you very much!</h3>\n"
+                                + "\n"
+                                + "</body>\n"
+                                + "\n"
+                                + "</html>";
+                    SendMail.send(user.getEmail(), SUB, msg, this.user, pass);
+                    detailDAO.updateQuantity(listCart,orderId);
+                    request.getSession().removeAttribute("listCart");
+                    response.sendRedirect("thank");
 
                 } else {//them list cart that bai
                     //remove order

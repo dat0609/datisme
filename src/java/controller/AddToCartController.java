@@ -39,7 +39,7 @@ public class AddToCartController extends HttpServlet {
             int productId = Integer.parseInt(request.getParameter("productId"));
             
             Product product = new  ProductDAO().getProductById(productId);
-            System.out.println(productId);
+            
             Cart cart = new Cart(productId,
                     product.getProduct_name(),
                     product.getImage(),
@@ -47,7 +47,7 @@ public class AddToCartController extends HttpServlet {
                     product.getQuantity(),//so luong trong database
                     1, //so luong trong gio hang
                     product.getPrice());
-            System.out.println(cart);
+            
             List<Cart> listCart = (List<Cart>) request.getSession().getAttribute("listCart");
             if(listCart == null) { // empty cart
                 listCart = new ArrayList<>();

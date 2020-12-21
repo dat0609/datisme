@@ -144,7 +144,7 @@ public class ProductDAO {
         return null;
     }
 
-    public boolean UpdateProduct(Product p) {
+    public int UpdateProduct(Product p) {
         boolean check = false;
         try {
             String query = "UPDATE [dbo].[product]\n"
@@ -163,10 +163,10 @@ public class ProductDAO {
             ps.setInt(4, p.getStatus());
             ps.setString(5, p.getImage());
             ps.setString(6, p.getProduct_id());
-            check = ps.executeUpdate() != 0 ? true : false;
+            return  ps.executeUpdate() ;
         } catch (Exception e) {
         }
-        return check;
+        return 0;
     }
 
     public int countProduct() {
@@ -254,4 +254,6 @@ public class ProductDAO {
         return null;
 
     }
+    
+    
 }

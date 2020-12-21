@@ -42,7 +42,7 @@
                         </span>
                         <div class="">Enter your email we'll send you a new password to get back into your account.</div>
                         <div class="wrap-input100 validate-input" data-validate = "Enter Email">
-                            <input class="input100" type="email" name="email" placeholder="Email">
+                            <input class="input100" type="email" name="email" placeholder="Email" required="">
                             <span class="focus-input100" data-placeholder="&#xf207;"></span>
                         </div>
 

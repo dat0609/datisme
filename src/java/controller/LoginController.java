@@ -94,14 +94,13 @@ public class LoginController extends HttpServlet {
                 response.sendRedirect("admin");
                 session.setAttribute("user", user);
             }
-            else if(user.getStatus() != 1) {
+            else if(user.getStatus() != 1) {//chua active code     
                 response.sendRedirect("active");
                 request.getSession().setAttribute("user", user);
-                System.out.println(user);
-            } //chua active code          
+                
+            }      
             else {
-                response.sendRedirect("home");
-            
+                response.sendRedirect("home");            
                 session.setAttribute("user", user);
                }
         }else{

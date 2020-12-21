@@ -76,7 +76,7 @@ public class ProfileController extends HttpServlet {
         User u = (User) request.getSession().getAttribute("user");
         User user = dao.getUserById(u.getUserId());
         request.getSession().setAttribute("user", user);
-        System.out.println(user);
+        
         String address = request.getParameter("address");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
