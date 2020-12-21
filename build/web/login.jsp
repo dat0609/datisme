@@ -63,8 +63,7 @@
                                 Login
                             </button>
                         </div>
-                        <a class="fa fa-google-plus " href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8084/BookStore/login-google&response_type=code
-                           &client_id=309221903013-hvg4o9vo3290ko1eg1bcheal0ljirme6.apps.googleusercontent.com&approval_prompt=force" style="color: white">Login With Google</a>
+                       
 
                         <div class="text-center p-t-30">
                             <a class="txt1" href="register">

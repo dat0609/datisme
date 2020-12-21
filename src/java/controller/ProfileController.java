@@ -37,7 +37,7 @@ public class ProfileController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProfileController</title>");            
+            out.println("<title>Servlet ProfileController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ProfileController at " + request.getContextPath() + "</h1>");
@@ -76,29 +76,25 @@ public class ProfileController extends HttpServlet {
         User u = (User) request.getSession().getAttribute("user");
         User user = dao.getUserById(u.getUserId());
         request.getSession().setAttribute("user", user);
-        
+
         String address = request.getParameter("address");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         String pass = request.getParameter("pass");
-        
+
         user.setEmail(email);
         user.setAddress(address);
         user.setPhone(phone);
         user.setPassword(pass);
         //user.setUserId(u.getUserId());
-        
-       int count = dao.updateUser(user);
-       if(count > 0){
-           System.out.println(count);
-           response.sendRedirect("profile");
-       }else{
-           
-       }
-//       System.out.println(count);
-//        System.out.println("user 2:"+user);
-//        response.sendRedirect("profile");
-        
+
+        int count = dao.updateUser(user);
+        if (count > 0) {
+            System.out.println(count);
+            response.sendRedirect("profile");
+        } else {
+            
+        }
     }
 
     /**

@@ -2,11 +2,11 @@
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <filter>
         <filter-name>FillterAdmin</filter-name>
-        <filter-class>controller.FillterAdmin</filter-class>
+        <filter-class>controller.admin.FillterAdmin</filter-class>
     </filter>
     <filter>
         <filter-name>FillterView</filter-name>
-        <filter-class>controller.FillterView</filter-class>
+        <filter-class>controller.admin.FillterView</filter-class>
     </filter>
     <filter>
         <filter-name>FillterLogin</filter-name>
@@ -58,7 +58,7 @@
     </servlet>
     <servlet>
         <servlet-name>AdminController</servlet-name>
-        <servlet-class>controller.AdminController</servlet-class>
+        <servlet-class>controller.admin.AdminController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ActiveCodeController</servlet-name>
@@ -102,11 +102,11 @@
     </servlet>
     <servlet>
         <servlet-name>AddProductController</servlet-name>
-        <servlet-class>controller.AddProductController</servlet-class>
+        <servlet-class>controller.admin.AddProductController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteProductController</servlet-name>
-        <servlet-class>controller.DeleteProductController</servlet-class>
+        <servlet-class>controller.admin.DeleteProductController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Thank</servlet-name>
@@ -114,7 +114,7 @@
     </servlet>
     <servlet>
         <servlet-name>UpdateProductController</servlet-name>
-        <servlet-class>controller.UpdateProductController</servlet-class>
+        <servlet-class>controller.admin.UpdateProductController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SearchController</servlet-name>
@@ -122,7 +122,7 @@
     </servlet>
     <servlet>
         <servlet-name>EditProduct</servlet-name>
-        <servlet-class>controller.EditProduct</servlet-class>
+        <servlet-class>controller.admin.EditProduct</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>

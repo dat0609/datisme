@@ -98,9 +98,7 @@
                             <a class="collapse-item" href="register">Register</a>
                             <a class="collapse-item" href="forgot-password">Forgot Password</a>
                             <div class="collapse-divider"></div>
-                            <h6 class="collapse-header">Other Pages:</h6>
-                            <a class="collapse-item" href="error.jsp">404 Page</a>
-                            <a class="collapse-item" href="blank.html">Blank Page</a>
+
                         </div>
                     </div>
                 </li>
@@ -181,7 +179,7 @@
                                                 <h3>${requestScope.totalUser}</h3>
                                             </div>
                                             <div class="col-auto">
-                                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                                <i class="fa fa-user" ></i>
                                             </div>
                                         </div>
                                     </div>
@@ -215,13 +213,14 @@
                                     <div
                                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                         <h6 class="m-0 font-weight-bold text-primary">Product Overview</h6>
+                                        
 
                                     </div>
 
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Product ID</th>
+                                                <th scope="col">No</th>
                                                 <th scope="col">Name</th>
                                                 <th scope="col">Price</th>
                                                 <th scope="col">Quantity</th>
@@ -235,7 +234,7 @@
                                             <c:forEach items="${requestScope.listProduct}" var="p" varStatus="counter">
                                             <form action="update-product">
                                                 <tr>
-                                                <input type="hidden" name="productId" value="${p.product_id}" />
+                                                
                                                 <td>${counter.count}</td>
                                                 <td>${p.product_name}</td>
                                                 <td>${p.price}</td>
@@ -243,8 +242,8 @@
                                                 <td style="size: 5px">${p.description}</td>
                                                 <td>${p.status}</td>
                                                 <td><img class="card-img-top" src="images/${p.image}" width="5" height="100" alt=""></td>
-                                                <td><a href="update-product?productId=${p.product_id}">Update</a></td>
-                                                <td><a  href="delete-product?productId=${p.product_id}" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a></td>   
+                                                <td><a class="fa fa-edit"href="update-product?productId=${p.product_id}">Update</a></td>
+                                                <td><a class="fa fa-trash-alt" href="delete-product?productId=${p.product_id}" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a></td>   
 
 
                                                 </tr>
@@ -255,9 +254,9 @@
 
                                     <nav aria-label="..." class="d-flex justify-content-center">
                                         <ul class="pagination pagination-lg">
-                                            <c:forEach begin="1" end="${totalPage}" var="i"> 
+                                            <c:forEach begin="1" end="${requestScope.totalPage}" var="i"> 
                                                 <c:choose>
-                                                    <c:when test="${PageIndex == i}">
+                                                    <c:when test="${requestScope.PageIndex == i}">
                                                         <li class="page-item active" aria-current="page">
                                                             <span class="page-link">
                                                                 ${i}
@@ -281,8 +280,8 @@
                                     <!-- Card Header - Dropdown -->
                                     <div
                                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold text-primary">Top User Buying</h6>
-
+                                        <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-money-check-alt"></i>Top User Buying</h6>
+                                        
                                     </div>
                                     <table class="table table-bordered">
                                         <thead >
@@ -293,7 +292,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:forEach items="${listTop}" var="l">
+                                            <c:forEach items="${requestScope.listTop}" var="l">
                                             <tr>
                                                 <td>${l.getCustomer()}</td>
                                                 <td>${l.totalPrice}</td>

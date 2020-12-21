@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.admin;
 
 import dao.ProductDAO;
 import dto.Product;
@@ -18,7 +18,14 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author liemn
  */
-public class UpdateProductController extends HttpServlet {
+
+public class AddProductController extends HttpServlet {
+
+    
+    
+    public AddProductController(){
+        
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,11 +41,15 @@ public class UpdateProductController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String id = request.getParameter("productId");
-            Product product = new ProductDAO().getProductById(Integer.parseInt(id));
-            
-            request.getSession().setAttribute("product", product);
-            request.getRequestDispatcher("updateProduct.jsp").forward(request, response);
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet AddProductController</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet AddProductController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -54,7 +65,7 @@ public class UpdateProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("addProduct.jsp").forward(request, response);
     }
 
     /**
@@ -68,7 +79,28 @@ public class UpdateProductController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        
+        String name = request.getParameter("name");
+        double price = Double.parseDouble(request.getParameter("price"));
+        String description = request.getParameter("description");
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        int status = Integer.parseInt(request.getParameter("status"));
+        String file = request.getParameter("file");
+        
+        Product product = new Product();
+        product.setProduct_name(name);
+        product.setPrice(price);
+        product.setDescription(description);
+        product.setQuantity(quantity);
+        product.setStatus(status);
+        product.setImage(file);
+        int count = new ProductDAO().addProduct(product);
+        if (count > 0) {
+            response.sendRedirect("admin");
+        }else{
+            response.sendRedirect("error.jsp");
+        }
     }
 
     /**

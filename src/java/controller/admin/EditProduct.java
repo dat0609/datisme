@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.admin;
 
-import dto.Cart;
+import dao.ProductDAO;
+import dto.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author liemn
  */
-public class DeleteCartController extends HttpServlet {
+public class EditProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,19 +29,12 @@ public class DeleteCartController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-             int productId = Integer.parseInt(request.getParameter("productId"));
-            List<Cart> listCart = (List<Cart>) request.getSession().getAttribute("listCart");
-             
-            for (int i = listCart.size() - 1; i >= 0; i--) {
-                if(listCart.get(i).getProductId() == productId) listCart.remove(i);   
-            }
-            if(listCart.size() == 0) request.getSession().removeAttribute("listCart");
-            response.sendRedirect("cart");
+            
+            
         }
     }
 
@@ -57,7 +50,7 @@ public class DeleteCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("updateProduct.jsp").forward(request, response);
     }
 
     /**
@@ -71,7 +64,25 @@ public class DeleteCartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String name = request.getParameter("name");
+            double price = Double.parseDouble(request.getParameter("price"));
+            String description = request.getParameter("description");
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
+            int status = Integer.parseInt(request.getParameter("price"));
+            
+            Product product = (Product) request.getSession().getAttribute("product");
+            
+            product.setProduct_name(name);
+            product.setPrice(price);
+            product.setDescription(description);
+            product.setQuantity(quantity);
+            product.setStatus(status);
+            
+            int count = new ProductDAO().UpdateProduct(product);
+            
+            if (count > 0) {
+                response.sendRedirect("admin");
+            }
     }
 
     /**

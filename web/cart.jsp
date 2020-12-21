@@ -56,9 +56,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach items="${listCart}" var="c" varStatus="counter">
+                                    <c:forEach items="${requestScope.listCart}" var="c" varStatus="counter">
                                         <tr>
-                                            <td><input type="hidden" value="${c.productId}" /></td>
+                                            
                                             <td>${counter.count}</td>
                                             <td>
                                                 <img src="images/${c.productImg}" style="width: 100px">
@@ -83,11 +83,10 @@
                             </table>
                             <hr/>
                             <div class="text-right">
-                                <h4>Total:<fmt:formatNumber type="number" value="${totalPrice}"/></h4>
+                                <h4>Total:<fmt:formatNumber type="number" value="${requestScope.totalPrice}"/></h4>
                             </div>
                             <hr/>
-                            <div class="text-right">
-                                <a href="#" class="btn btn-danger"><i class="fas fa-trash mr-2"></i>Delete Cart</a>
+                            <div class="text-right">                                
 
                                 <button type="submit" class="btn btn-info ml-2"><i class="fas fa-sync-alt mr-2"></i>Update Cart</button>
                                 <a href="checkout" class="btn btn-success ml-2">Continue

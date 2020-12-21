@@ -7,13 +7,9 @@ package dao;
 
 import context.DBContext;
 import dto.Cart;
-import dto.Order;
-import dto.OrderDetail;
-import dto.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.List;
 
 /**

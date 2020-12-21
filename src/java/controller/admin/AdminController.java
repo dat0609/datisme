@@ -3,12 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.admin;
 
+import dao.OrderDAO;
 import dao.ProductDAO;
+import dao.UserDAO;
+import dao.ViewDAO;
+import dto.Order;
 import dto.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author liemn
  */
-public class EditProduct extends HttpServlet {
+public class AdminController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,8 +38,33 @@ public class EditProduct extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            int pageIndex = 1;
+            final int PAGE_SIZE = 4;
+
+            String raw_page = request.getParameter("pageIndex");
+            if (raw_page != null) {
+                pageIndex = Integer.parseInt(raw_page);
+            }
+            ProductDAO dao = new ProductDAO();
+            OrderDAO orderDAO = new OrderDAO();
+            List<Product> listProduct = dao.getAllPaggingAdmin(pageIndex, PAGE_SIZE);
+            List<Order> listTop = orderDAO.getTopUser();
             
+            int totalPage = dao.countPage(PAGE_SIZE);        
+            int count = new ViewDAO().getView();
+            int count1 = new UserDAO().getNumUser();
+            double count2 = orderDAO.getTotalMoney();
+            int count3 = dao.countProduct();
             
+            request.setAttribute("listTop", listTop);
+            request.setAttribute("totalProduct", count3);
+            request.setAttribute("totalMoney", count2);
+            request.setAttribute("totalUser", count1);
+            request.setAttribute("viewCount", count);
+            request.setAttribute("listProduct", listProduct);
+            request.setAttribute("totalPage", totalPage);
+            request.setAttribute("PageIndex", pageIndex);
+            request.getRequestDispatcher("admin.jsp").forward(request, response);
         }
     }
 
@@ -50,7 +80,7 @@ public class EditProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("updateProduct.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -64,25 +94,7 @@ public class EditProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String name = request.getParameter("name");
-            double price = Double.parseDouble(request.getParameter("price"));
-            String description = request.getParameter("description");
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
-            int status = Integer.parseInt(request.getParameter("price"));
-            
-            Product product = (Product) request.getSession().getAttribute("product");
-            System.out.println(product);
-            product.setProduct_name(name);
-            product.setPrice(price);
-            product.setDescription(description);
-            product.setQuantity(quantity);
-            product.setStatus(status);
-            
-            int count = new ProductDAO().UpdateProduct(product);
-            
-            if (count > 0) {
-                response.sendRedirect("admin");
-            }
+        processRequest(request, response);
     }
 
     /**

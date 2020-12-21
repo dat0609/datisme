@@ -79,8 +79,7 @@ public class ForgotPassword extends HttpServlet {
             throws ServletException, IOException {
         String email = request.getParameter("email");
 
-        User user = new UserDAO().getUserByEmail(email);
-        System.out.println(user);
+        User user = new UserDAO().getUserByEmail(email);       
 
         String msg ="ID: "+ user.getUserId() + " Password: "+ user.getPassword();
         if (user != null) {

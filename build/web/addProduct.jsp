@@ -51,7 +51,7 @@
                       name="name"
                       type="text"
                       class="form-control validate"
-                      required
+                      required=""
                     />
                   </div>
                     
@@ -63,9 +63,9 @@
                     <input
                       id="name"
                       name="price"
-                      type="text"
+                      type="number"
                       class="form-control validate"
-                      required
+                      required=""
                     />
                   </div>
                     
@@ -78,7 +78,7 @@
                         name="description"
                       class="form-control validate"
                       rows="3"
-                      required
+                      required=""
                     ></textarea>
                   </div>
                   <div class="row">
@@ -103,9 +103,9 @@
                           <input
                             id="stock"
                             name="status"
-                            type="text"
+                            type="number"
                             class="form-control validate"
-                            required
+                            required=""
                           />
                         </div>
                   </div>

@@ -37,7 +37,7 @@ public class ActiveCodeController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ActiveCodeController</title>");            
+            out.println("<title>Servlet ActiveCodeController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ActiveCodeController at " + request.getContextPath() + "</h1>");
@@ -74,14 +74,14 @@ public class ActiveCodeController extends HttpServlet {
             throws ServletException, IOException {
         String code = request.getParameter("code");
         String userId = request.getParameter("userID");
-        
+
         User user = new UserDAO().getUserById(userId);
-     
-            if(user.getActive_code().equals(code)){
+
+        if (user.getActive_code().equals(code)) {
             new UserDAO().updateStatus(userId, 1);
             response.sendRedirect("home");
             request.getSession().setAttribute("user", user);
-        }else{
+        } else {
             request.setAttribute("err", "Invalid code,re-type");
             request.getRequestDispatcher("activeCode.jsp").forward(request, response);
         }

@@ -7,13 +7,10 @@ package controller;
 
 import dao.OrderDAO;
 import dao.OrderDetailDAO;
-import dao.ProductDAO;
 import dao.SendMail;
 import dao.ShippingDAO;
 import dto.Cart;
 import dto.Order;
-import dto.OrderDetail;
-import dto.Product;
 import dto.Shipping;
 import dto.User;
 import java.io.IOException;

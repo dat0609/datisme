@@ -7,8 +7,6 @@ package dao;
 
 import context.DBContext;
 import dto.Order;
-import dto.Shipping;
-import dto.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -72,7 +70,7 @@ public class OrderDAO {
         return 0;
     }
     public List<Order> getTopUser(){
-        String query = " select userId,totalPrice,date from Orders order by totalPrice ";
+        String query = "select top 3 userId,totalPrice,date from Orders order by totalPrice DESC ";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);

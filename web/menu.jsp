@@ -23,8 +23,8 @@
                 <li class="nav-item">
                     <div class="d-flex">
                     <a class="nav-link" href="cart">Cart</a>
-                    <span style="color: orange">${sessionScope.listCart.size()}</span>
-                    </div>
+                    <span style="color: orange">${sessionScope.listCart.size()}</span>                   
+                    </div>                    
                 </li>
                 <c:choose>
                     <c:when test="${sessionScope.user != null}">

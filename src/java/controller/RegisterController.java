@@ -10,7 +10,6 @@ import dao.UserDAO;
 import dto.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.Random;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -101,7 +100,6 @@ public class RegisterController extends HttpServlet {
             capcha = capcha + root.charAt(index);
         }
         user.setActive_code(capcha);
-        //System.out.println(user);
         int count = 0;
         if (u == null) {
             count = new UserDAO().create(user);
